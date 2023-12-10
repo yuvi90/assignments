@@ -6,17 +6,41 @@
  */
 
 function waitOneSecond() {
-
+  return new Promise((res, rej) => {
+    setTimeout(() => {
+      res();
+    }, 1000);
+  });
 }
 
 function waitTwoSecond() {
-
+  return new Promise((res, rej) => {
+    setTimeout(() => {
+      res();
+    }, 2000);
+  });
 }
 
 function waitThreeSecond() {
-
+  return new Promise((res, rej) => {
+    setTimeout(() => {
+      res();
+    }, 3000);
+  });
 }
 
 function calculateTime() {
-
+  let startTime = Date.now();
+  waitOneSecond().then(() => {
+    waitTwoSecond().then(() => {
+      waitThreeSecond().then(() => {
+        let endTime = (Date.now() - startTime) / 1000;
+        console.log(
+          `Total time taken to resolve all promises ${endTime} seconds.`
+        );
+      });
+    });
+  });
 }
+
+calculateTime();
